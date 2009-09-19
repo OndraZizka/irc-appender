@@ -15,6 +15,9 @@
 */
 package net.sf.ircappender;
 
+import java.util.NoSuchElementException;
+import java.util.Vector;
+
 import org.apache.log4j.spi.LoggingEvent;
 
 /**
@@ -26,28 +29,36 @@ public class Fifo {
 
 	public static final int AUTOPOP = 1;
 	public static final int REFUSE = 2;
+	
+	private Vector elements = new Vector();
+	private int bufferSize;
+	private int fullStrategy;
 
-	public Fifo(int buffersize, int fullstrategy) {
-		// TODO Auto-generated constructor stub
+	public Fifo(int bufferSize, int fullStrategy) {
+		this.bufferSize = bufferSize;
+		this.fullStrategy = fullStrategy;
 	}
 
-	public LoggingEvent pop() {
-		// TODO Auto-generated method stub
-		return null;
+	public LoggingEvent pop() throws NoSuchElementException {
+		return (LoggingEvent) elements.remove(0);
 	}
-
 
 	public void add(LoggingEvent e) {
-		// TODO Auto-generated method stub
+		if (elements.size() < bufferSize) {
+			elements.add(e);
+		} else {
+			if (fullStrategy == AUTOPOP) {
+				elements.remove(0);
+				elements.add(e);
+			}
+		}
 	}
 
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return elements.isEmpty();
 	}
 
-	public String size() {
-		// TODO Auto-generated method stub
-		return null;
+	public int size() {
+		return elements.size();
 	}
 }

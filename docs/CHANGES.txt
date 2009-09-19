@@ -1,0 +1,16 @@
+version 0.2
+------------
+Release date: .......
+
+* migrated the content of the 0.1 release to CVS for further development
+* nhnb adopted the project after it seemed dead for years and vuud 
+  is unfortunately not reachable anymore. I'd like to thank him for 
+  writing and releasing this wonderful tool.
+
+
+
+version 0.1
+------------
+Release date: 2003-03-18
+vuud released the first version of IrcAppender to the public under the
+Apache Software License.

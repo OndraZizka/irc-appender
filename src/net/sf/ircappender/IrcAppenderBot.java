@@ -106,7 +106,7 @@ public class IrcAppenderBot extends PircBot implements Runnable {
    * Transfers one LoggingEvent Entry from the eventQue to the ircMessage que
   */
 	private void transferEntry () {
-		le = (LoggingEvent) eventQue.pop();
+		le = eventQue.pop();
 		sendMessage (channel,(String) le.getMessage());
 	}
 

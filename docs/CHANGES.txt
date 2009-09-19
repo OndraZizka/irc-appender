@@ -1,7 +1,10 @@
 version 0.2
 ------------
 Release date: .......
-
+* fixed ClassCastException on logging of non-String objects
+  (parts of patch #1471866).
+* untangled dependencies, reimplemented Fifo.java which was only available
+  as binary, splitted .jar files
 * migrated the content of the 0.1 release to CVS for further development
 * nhnb adopted the project after it seemed dead for years and vuud 
   is unfortunately not reachable anymore. I'd like to thank him for 

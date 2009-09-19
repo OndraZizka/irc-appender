@@ -107,7 +107,11 @@ public class IrcAppenderBot extends PircBot implements Runnable {
   */
 	private void transferEntry () {
 		le = eventQue.pop();
-		sendMessage (channel,(String) le.getMessage());
+		Object temp = le.getMessage();
+		if (temp == null) {
+			temp = "";
+		}
+		sendMessage (channel, temp.toString());
 	}
 
 

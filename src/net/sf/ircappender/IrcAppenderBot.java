@@ -1,4 +1,4 @@
-package com.explosivo.log4j.net;
+package net.sf.ircappender;
 
 import com.explosivo.jlibrary.data.Fifo;
 import org.apache.log4j.spi.LoggingEvent;

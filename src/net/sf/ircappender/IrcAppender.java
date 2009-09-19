@@ -1,4 +1,4 @@
-package com.explosivo.log4j.net;
+package net.sf.ircappender;
 
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.spi.LoggingEvent;

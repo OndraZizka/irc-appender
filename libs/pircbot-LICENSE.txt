@@ -1,0 +1,16 @@
+Copyright Paul James Mutton, 2001-2003, http://www.jibble.org/
+
+This file is part of PircBot.
+
+You may freely use PircBot to make your own IRC bots and clients.
+
+Any software that makes use of the PircBot package must clearly
+state that it makes use of the PircBot Java IRC Bot Framework (or
+some similar wording) found at http://www.jibble.org/
+
+This source code, or parts thereof, may not be distributed in any
+modified form without permission from the author.
+
+PircBot is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.

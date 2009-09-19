@@ -29,7 +29,7 @@ public class IrcAppenderBot extends PircBot implements Runnable {
 	
 	private Fifo eventQue = null;
 	private String channel;
-
+	private boolean debug = false;
 
 	private LoggingEvent le;
 
@@ -70,9 +70,11 @@ public class IrcAppenderBot extends PircBot implements Runnable {
 			}
 			else
 			{
-				if (! (eventQue == null)) System.out.println("Outgoing que: " + this.getOutgoingQueueSize() + " Event Que:" + eventQue.size());
+				if (debug && !(eventQue == null)) {
+					System.out.println("Outgoing que: " + this.getOutgoingQueueSize() + " Event Que:" + eventQue.size());
+				}
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(this.getMessageDelay());
 				}
 				catch (Exception e) {
 					System.out.println("IrcAppenderBot exception " + e.getMessage());
@@ -89,7 +91,7 @@ public class IrcAppenderBot extends PircBot implements Runnable {
 						
 			System.out.println("waiting for buffer to drain");
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(this.getMessageDelay());
 			}
 			catch (Exception e) {
 				System.out.println("IrcAppenderBot exception " + e.getMessage());
@@ -136,7 +138,9 @@ public class IrcAppenderBot extends PircBot implements Runnable {
 		User[] users = this.getUsers(channel);
 		
 		if (users.length < 2) {
-			System.out.println("We are alone");
+			if (debug) {
+				System.out.println("We are alone");
+			}
 			state = false;
 			try {
 				Thread.sleep(2000);
@@ -190,6 +194,13 @@ public class IrcAppenderBot extends PircBot implements Runnable {
 		return channel;
 	}
 
+	/**
+	 * Sets the debug flag
+	 * @param debug debug flag
+	 */
+	public void setDebug(boolean debug) {
+		this.debug = debug;
+	}
 	/**
 	 * Sets the channel.
 	 * @param channel The channel to set

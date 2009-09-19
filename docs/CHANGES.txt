@@ -1,7 +1,11 @@
 version 0.3
 -----------
 Release date:
-
+* delay between massages can be configured now (defaults to 1 second).
+  Do not set it to a lower value on public irc-serves.
+* output of sent data is now optional
+* deactivated debug option on default
+* added a very simple test application
 
 version 0.2
 ------------

@@ -20,16 +20,11 @@ import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.spi.LoggingEvent;
 
 /**
- * 
- * 
- * 
- * 
- * 
- * @author Administrator
+ * appends log-events to an irc channel.
  */
 public class IrcAppender extends AppenderSkeleton {
 
-	private static final boolean debug = true;
+	private static final boolean debug = false;
 
 	private String host;
 	private String username;
@@ -37,13 +32,14 @@ public class IrcAppender extends AppenderSkeleton {
 	private String channel;
 	private String buffertype = "autopop";
 	private String nickname;
+	private long messageDelay = 1000;
 	private int buffersize = 1000;
 	private boolean isClosing;
 	
 	private Fifo eventQue = null;
 	private IrcAppenderBot abt = null;
 	private Thread botThread;
-	
+
 	/**
 	 * Calls the superclass constructor.  No other logic at this time
 	 */
@@ -83,19 +79,21 @@ public class IrcAppender extends AppenderSkeleton {
 		
 		IrcAppenderBot bot = new IrcAppenderBot(nickname);
 		
-		if (debug) bot.setVerbose(true);
-				
+		bot.setVerbose(debug);
+		bot.setDebug(debug);
+
+		bot.setMessageDelay(messageDelay);
 		bot.changeNick(nickname);
 
 		try {
-			
+
 			if (password == null ) {
 				bot.connect(this.getHost(), 6667);
 			}
 			else {
 				bot.connect(this.getHost(), 6667, this.getPassword());
 			}
-								
+
 			bot.joinChannel("#" + this.getChannel());
 
 		}
@@ -251,4 +249,18 @@ public class IrcAppender extends AppenderSkeleton {
 		this.nickname = nickname;
 	}
 
+	/**
+	* Set the delay between messages
+	* @param messageDelay in milliseconds
+	*/
+	public void setMessageDelay(long messageDelay) {
+		this.messageDelay = messageDelay;
+	}
+
+	/**
+	 * @return long
+	 */
+	public long getMessageDelay() {
+		return messageDelay;
+	}
 }

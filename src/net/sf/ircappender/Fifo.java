@@ -12,25 +12,22 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-
- */
+*/
 package net.sf.ircappender;
-
-import java.util.Vector;
 
 import org.apache.log4j.spi.LoggingEvent;
 
 /**
- * A first in first out buffer
+ * A first in, first out buffer
  *
  * @author nhnb
  */
-public class Fifo extends Vector {
+public class Fifo {
 
 	public static final int AUTOPOP = 1;
 	public static final int REFUSE = 2;
 
-	public Fifo(int i, int buffersize, int autopop2) {
+	public Fifo(int buffersize, int fullstrategy) {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -39,4 +36,18 @@ public class Fifo extends Vector {
 		return null;
 	}
 
+
+	public void add(LoggingEvent e) {
+		// TODO Auto-generated method stub
+	}
+
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public String size() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

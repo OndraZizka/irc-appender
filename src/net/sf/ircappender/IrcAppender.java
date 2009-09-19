@@ -18,7 +18,6 @@ package net.sf.ircappender;
 
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.spi.LoggingEvent;
-import com.explosivo.jlibrary.data.Fifo;
 
 /**
  * 
@@ -63,11 +62,11 @@ public class IrcAppender extends AppenderSkeleton {
 		if (debug) System.out.println("Activate options");
 		
 		if (buffertype.equalsIgnoreCase("autopop")) {
-			eventQue = new Fifo(1,buffersize, Fifo.AUTOPOP);		
+			eventQue = new Fifo(buffersize, Fifo.AUTOPOP);		
 		} else if (buffertype.equalsIgnoreCase("refuse")) {
-			eventQue = new Fifo(1,buffersize, Fifo.REFUSE);
+			eventQue = new Fifo(buffersize, Fifo.REFUSE);
 		} else {
-			eventQue = new Fifo(1,buffersize, Fifo.AUTOPOP);
+			eventQue = new Fifo(buffersize, Fifo.AUTOPOP);
 		}
 				
 		abt = doIrcBotInitialization();

@@ -1,6 +1,11 @@
+version 0.3
+-----------
+Release date:
+
+
 version 0.2
 ------------
-Release date: .......
+Release date: 2009-09-19
 * fixed ClassCastException on logging of non-String objects
   (parts of patch #1471866).
 * untangled dependencies, reimplemented Fifo.java which was only available

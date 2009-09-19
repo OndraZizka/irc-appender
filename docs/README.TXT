@@ -12,7 +12,7 @@ USAGE (The Quick Version)
 In your application, you need to add the following to your log4j properties file.
 
 
-log4j.appender.irc=net.sf.IrcAppender
+log4j.appender.irc=net.sf.ircappender.IrcAppender
 log4j.appender.irc.host=irchostname.com
 log4j.appender.irc.username=log4jchat
 log4j.appender.irc.password=password if needed

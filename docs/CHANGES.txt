@@ -5,6 +5,7 @@ Release date: .......
   (parts of patch #1471866).
 * untangled dependencies, reimplemented Fifo.java which was only available
   as binary, splitted .jar files
+* the package path is now "net.sf.ircappender"
 * migrated the content of the 0.1 release to CVS for further development
 * nhnb adopted the project after it seemed dead for years and vuud 
   is unfortunately not reachable anymore. I'd like to thank him for 

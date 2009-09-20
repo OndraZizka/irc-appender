@@ -29,11 +29,20 @@ public class Fifo {
 
 	/** remove the oldest element if the fifo is full */
 	public static final int AUTOPOP = 1;
+
 	/** ignore the request to add more elements if the fifo is full */
 	public static final int REFUSE = 2;
-	
+
+
+	/** storage of elements */
 	private Vector elements = new Vector();
+
+	/** maximum number of elements to store */
 	private int bufferSize;
+
+	/** what to do if the buffer is full (AUTOPOP or REFUSE) */
+	// Note: log4j is compatible with Java 1.1.x and we aim for the same goal.
+	//       so we cannot use enumeration (Java 1.5) here.
 	private int fullStrategy;
 
 	/**
@@ -66,7 +75,10 @@ public class Fifo {
 	public void add(LoggingEvent e) {
 		if (elements.size() < bufferSize) {
 			elements.add(e);
+
 		} else {
+			// urgh, we are full.
+
 			if (fullStrategy == AUTOPOP) {
 				elements.remove(0);
 				elements.add(e);

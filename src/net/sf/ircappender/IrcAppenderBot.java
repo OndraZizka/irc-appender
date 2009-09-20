@@ -17,7 +17,8 @@
 package net.sf.ircappender;
 
 import org.apache.log4j.spi.LoggingEvent;
-import org.jibble.pircbot.*;
+import org.jibble.pircbot.PircBot;
+import org.jibble.pircbot.User;
 
 /**
  * @author W B Chmura
@@ -25,10 +26,13 @@ import org.jibble.pircbot.*;
 public class IrcAppenderBot extends PircBot implements Runnable {
 
 	private boolean isRunning;
+
 	private boolean isChannelNotEmpty = true;
-	
+
 	private Fifo eventQue = null;
+
 	private String channel;
+
 	private boolean debug = false;
 
 	private LoggingEvent le;
@@ -42,8 +46,8 @@ public class IrcAppenderBot extends PircBot implements Runnable {
 		this.setName(varNickname);
 		System.out.println("Irc Appender Bot: constructing");
 	}
-	
-	
+
+
 	/**
 	 * Constructs the PIRCBOT then calls setName with a default of Log4JChatBot 
 	 * @param varNickname The name the bot should use
@@ -60,69 +64,64 @@ public class IrcAppenderBot extends PircBot implements Runnable {
 	public void run() {
 
 		setRunning(true);
-				
+
 		while (isRunning) {
-		
-		 if(channelNotEmpty(channel)) {
-			
-			if( ! (eventQue == null) && ! eventQue.isEmpty() && (this.getOutgoingQueueSize() == 0) ) {
-				transferEntry();
-			}
-			else
-			{
-				if (debug && !(eventQue == null)) {
-					System.out.println("Outgoing que: " + this.getOutgoingQueueSize() + " Event Que:" + eventQue.size());
-				}
-				try {
-					Thread.sleep(this.getMessageDelay());
-				}
-				catch (Exception e) {
-					System.out.println("IrcAppenderBot exception " + e.getMessage());
-				} //End try
-			} // End If
-		  } // Usercheck
+
+			if (channelNotEmpty(channel)) {
+
+				if (!(eventQue == null) && !eventQue.isEmpty() && (this.getOutgoingQueueSize() == 0)) {
+					transferEntry();
+				} else {
+					if (debug && !(eventQue == null)) {
+						System.out.println("Outgoing que: " + this.getOutgoingQueueSize() + " Event Que:" + eventQue.size());
+					}
+					try {
+						Thread.sleep(this.getMessageDelay());
+					} catch (Exception e) {
+						System.out.println("IrcAppenderBot exception " + e.getMessage());
+					} //End try
+				} // End If
+			} // Usercheck
 		} // Running loop
-		
-		while (! eventQue.isEmpty() && isChannelNotEmpty) {
+
+		while (!eventQue.isEmpty() && isChannelNotEmpty) {
 			transferEntry();
 		}
-				
-		while ( this.getOutgoingQueueSize() > 0  && isChannelNotEmpty) {
-						
+
+		while ((this.getOutgoingQueueSize() > 0) && isChannelNotEmpty) {
+
 			System.out.println("waiting for buffer to drain");
 			try {
 				Thread.sleep(this.getMessageDelay());
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				System.out.println("IrcAppenderBot exception " + e.getMessage());
 			} //End try			
 
 		}
-			
+
 		System.out.println("IrcAppenderBot shutting down");
 		this.quitServer();
-		
+
 	}
 
-  /**
-   * Transfers one LoggingEvent Entry from the eventQue to the ircMessage que
-  */
-	private void transferEntry () {
+	/**
+	 * Transfers one LoggingEvent Entry from the eventQue to the ircMessage que
+	*/
+	private void transferEntry() {
 		le = eventQue.pop();
 		Object temp = le.getMessage();
 		if (temp == null) {
 			temp = "";
 		}
-		sendMessage (channel, temp.toString());
+		sendMessage(channel, temp.toString());
 	}
 
 
-	public void onMessage(String channel, String sender,
-							 String login, String hostname, String message) {
-		 if (message.equalsIgnoreCase("time")) {
-			  String time = new java.util.Date().toString();
-			  sendMessage(channel, sender + ": The time is now " + time);
-		 }
+	public void onMessage(String channel, String sender, String login, String hostname, String message) {
+		if (message.equalsIgnoreCase("time")) {
+			String time = new java.util.Date().toString();
+			sendMessage(channel, sender + ": The time is now " + time);
+		}
 	}
 
 
@@ -136,7 +135,7 @@ public class IrcAppenderBot extends PircBot implements Runnable {
 	public boolean channelNotEmpty(String channel) {
 		boolean state;
 		User[] users = this.getUsers(channel);
-		
+
 		if (users.length < 2) {
 			if (debug) {
 				System.out.println("We are alone");
@@ -144,20 +143,17 @@ public class IrcAppenderBot extends PircBot implements Runnable {
 			state = false;
 			try {
 				Thread.sleep(2000);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				System.out.println("IrcAppenderBot exception " + e.getMessage());
 			} //End try
 
-		}
-		else
-		{
+		} else {
 			state = true;
 		}
-				
+
 		isChannelNotEmpty = state;
-		
-		
+
+
 		return (state);
 	}
 
@@ -201,6 +197,7 @@ public class IrcAppenderBot extends PircBot implements Runnable {
 	public void setDebug(boolean debug) {
 		this.debug = debug;
 	}
+
 	/**
 	 * Sets the channel.
 	 * @param channel The channel to set

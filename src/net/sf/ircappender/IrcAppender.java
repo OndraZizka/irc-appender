@@ -27,17 +27,27 @@ public class IrcAppender extends AppenderSkeleton {
 	private static final boolean debug = false;
 
 	private String host;
+
 	private String username;
+
 	private String password;
+
 	private String channel;
+
 	private String buffertype = "autopop";
+
 	private String nickname;
+
 	private long messageDelay = 1000;
+
 	private int buffersize = 1000;
+
 	private boolean isClosing;
-	
+
 	private Fifo eventQue = null;
+
 	private IrcAppenderBot abt = null;
+
 	private Thread botThread;
 
 	/**
@@ -45,29 +55,33 @@ public class IrcAppender extends AppenderSkeleton {
 	 */
 	public IrcAppender() {
 		super();
-		if (debug) System.out.println("Irc Appender constructing");
+		if (debug) {
+			System.out.println("Irc Appender constructing");
+		}
 	}
 
 
 	/**
- 	 * Initializes the system after the options are set
- 	 * @see org.apache.log4j.spi.OptionHandler#activateOptions()
- 	 */
-	public void activateOptions ( ) {
-	
-		if (debug) System.out.println("Activate options");
-		
+	 * Initializes the system after the options are set
+	 * @see org.apache.log4j.spi.OptionHandler#activateOptions()
+	 */
+	public void activateOptions() {
+
+		if (debug) {
+			System.out.println("Activate options");
+		}
+
 		if (buffertype.equalsIgnoreCase("autopop")) {
-			eventQue = new Fifo(buffersize, Fifo.AUTOPOP);		
+			eventQue = new Fifo(buffersize, Fifo.AUTOPOP);
 		} else if (buffertype.equalsIgnoreCase("refuse")) {
 			eventQue = new Fifo(buffersize, Fifo.REFUSE);
 		} else {
 			eventQue = new Fifo(buffersize, Fifo.AUTOPOP);
 		}
-				
+
 		abt = doIrcBotInitialization();
 		abt.setEventQue(eventQue);
-		botThread= new Thread (abt);
+		botThread = new Thread(abt);
 		botThread.start();
 	}
 
@@ -75,10 +89,10 @@ public class IrcAppender extends AppenderSkeleton {
 	 * Handles the initialization of the IrcBot object
 	 * @return IrcAppenderBot the Initialized bot
 	 */
-	private IrcAppenderBot doIrcBotInitialization( ) {
-		
+	private IrcAppenderBot doIrcBotInitialization() {
+
 		IrcAppenderBot bot = new IrcAppenderBot(nickname);
-		
+
 		bot.setVerbose(debug);
 		bot.setDebug(debug);
 
@@ -87,24 +101,22 @@ public class IrcAppender extends AppenderSkeleton {
 
 		try {
 
-			if (password == null ) {
+			if (password == null) {
 				bot.connect(this.getHost(), 6667);
-			}
-			else {
+			} else {
 				bot.connect(this.getHost(), 6667, this.getPassword());
 			}
 
 			bot.joinChannel("#" + this.getChannel());
 
-		}
-		catch (Exception e) {
-			System.out.println("Exception: " + e.getMessage());		
+		} catch (Exception e) {
+			System.out.println("Exception: " + e.getMessage());
 		}
 
 		bot.setChannel("#" + this.getChannel());
-      
+
 		return (bot);
-		
+
 	}
 
 
@@ -115,7 +127,9 @@ public class IrcAppender extends AppenderSkeleton {
 	 * @see org.apache.log4j.AppenderSkeleton#append(org.apache.log4j.spi.LoggingEvent)
 	 */
 	protected void append(LoggingEvent arg0) {
-		if (! isClosing) eventQue.add(arg0);
+		if (!isClosing) {
+			eventQue.add(arg0);
+		}
 	}
 
 	/* (non-Javadoc)
@@ -134,9 +148,9 @@ public class IrcAppender extends AppenderSkeleton {
 		isClosing = true;
 		abt.setRunning(false);
 		try {
-			 botThread.join();
+			botThread.join();
 		} catch (Exception e) {
-			 System.out.println("Exception on close join thing " + e.getMessage());			
+			System.out.println("Exception on close join thing " + e.getMessage());
 		}
 	}
 
@@ -184,7 +198,7 @@ public class IrcAppender extends AppenderSkeleton {
 	 */
 	public void setBuffersize(int buffersize) {
 		this.buffersize = buffersize;
-		
+
 	}
 
 	/**

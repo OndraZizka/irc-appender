@@ -1,8 +1,6 @@
 package net.sf.ircappender.app;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -22,12 +20,9 @@ public class TestApplication {
 	 * @throws IOException 
 	 */
 	public static void init() throws IOException {
-		InputStream propsFile = TestApplication.class.getResourceAsStream("log4j.properties");
-		Properties props = new Properties();
-		props.load(propsFile);
-		PropertyConfigurator.configure(props);
+		PropertyConfigurator.configure(TestApplication.class.getResource("log4j.properties"));
 	}
-	
+
 	/**
 	 * @param args
 	 * @throws IOException 

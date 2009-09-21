@@ -31,7 +31,7 @@ public class IrcAppenderBot extends PircBot implements Runnable {
 
 	private Fifo eventQue = null;
 
-	private String channel;
+	private String logChannel;
 
 	private boolean debug = false;
 
@@ -67,7 +67,7 @@ public class IrcAppenderBot extends PircBot implements Runnable {
 
 		while (isRunning) {
 
-			if (channelNotEmpty(channel)) {
+			if (channelNotEmpty(logChannel)) {
 
 				if (!(eventQue == null) && !eventQue.isEmpty() && (this.getOutgoingQueueSize() == 0)) {
 					transferEntry();
@@ -113,7 +113,7 @@ public class IrcAppenderBot extends PircBot implements Runnable {
 		if (temp == null) {
 			temp = "";
 		}
-		sendMessage(channel, temp.toString());
+		sendMessage(logChannel, temp.toString());
 	}
 
 
@@ -187,7 +187,7 @@ public class IrcAppenderBot extends PircBot implements Runnable {
 	 * @return String
 	 */
 	public String getChannel() {
-		return channel;
+		return logChannel;
 	}
 
 	/**
@@ -203,7 +203,7 @@ public class IrcAppenderBot extends PircBot implements Runnable {
 	 * @param channel The channel to set
 	 */
 	public void setChannel(String channel) {
-		this.channel = channel;
+		this.logChannel = channel;
 	}
 
 }

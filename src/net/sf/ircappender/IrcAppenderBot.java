@@ -44,7 +44,6 @@ public class IrcAppenderBot extends PircBot implements Runnable {
 	public IrcAppenderBot(String varNickname) {
 		super();
 		this.setName(varNickname);
-		System.out.println("Irc Appender Bot: constructing");
 	}
 
 
@@ -53,9 +52,7 @@ public class IrcAppenderBot extends PircBot implements Runnable {
 	 * @param varNickname The name the bot should use
 	 */
 	public IrcAppenderBot() {
-		super();
 		this.setName("Log4JChatBot");
-		System.out.println("Irc Appender Bot: constructing");
 	}
 
 	/* (non-Javadoc)
@@ -89,8 +86,9 @@ public class IrcAppenderBot extends PircBot implements Runnable {
 		}
 
 		while ((this.getOutgoingQueueSize() > 0) && isChannelNotEmpty) {
-
-			System.out.println("waiting for buffer to drain");
+			if (debug) {
+				System.out.println("waiting for buffer to drain");
+			}
 			try {
 				Thread.sleep(this.getMessageDelay());
 			} catch (Exception e) {
@@ -99,9 +97,11 @@ public class IrcAppenderBot extends PircBot implements Runnable {
 
 		}
 
-		System.out.println("IrcAppenderBot shutting down");
-		this.quitServer();
+		if (debug) {
+			System.out.println("IrcAppenderBot shutting down");
+		}
 
+		this.quitServer();
 	}
 
 	/**
@@ -130,8 +130,6 @@ public class IrcAppenderBot extends PircBot implements Runnable {
 	 * @param channel The channel name to check
 	 * @return boolean true if there are more than one users in the channel
 	 */
-
-
 	public boolean channelNotEmpty(String channel) {
 		boolean state;
 		User[] users = this.getUsers(channel);

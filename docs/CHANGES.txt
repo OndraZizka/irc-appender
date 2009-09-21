@@ -1,4 +1,10 @@
-version 0.3
+Version 0.4
+-----------
+Release date: ..........
+
+
+
+Version 0.3
 -----------
 Release date: 2009-09-21
 * created a small binary only distribution in addition to the complete one (fixes #2862528)
@@ -12,7 +18,7 @@ Release date: 2009-09-21
 
 
 
-version 0.2
+Version 0.2
 ------------
 Release date: 2009-09-19
 * fixed ClassCastException on logging of non-String objects
@@ -27,7 +33,7 @@ Release date: 2009-09-19
 
 
 
-version 0.1
+Version 0.1
 ------------
 Release date: 2003-03-18
 vuud released the first version of IrcAppender to the public under the

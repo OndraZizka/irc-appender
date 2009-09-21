@@ -67,7 +67,15 @@
 	
 	<!-- creates the distribution, packing all requires files together -->
 	<target name="dist" depends="jar" description="builds the distribution">
-	
+
+		<zip destfile="build/dist/ircappender-bin-${version}.zip">
+			<fileset dir=".">
+				<include name="ircappender-${version}.jar"/>
+				<include name="docs/**"/>
+				<include name="libs/pircbot-LICENSE.txt"/>
+				<include name="libs/pircbot.jar"/>
+			</fileset>
+		</zip>	
 
 		<zip destfile="build/dist/ircappender-src-${version}.zip">
 			<fileset dir=".">

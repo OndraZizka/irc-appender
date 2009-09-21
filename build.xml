@@ -9,14 +9,11 @@
 
 	<!-- *** define variables *** -->
 
+	<property name="version" value="0.3" />
+
+
 	<property name="build" value="build/dist" />
 	<property name="testresult" value="build/testresult" />
-	<path id="cobertura.classpath">
-		<fileset dir="build/cobertura">
-			<include name="*.jar" />
-		</fileset>
-	</path>
-
 
 	<!-- ***   clean   *** -->
 
@@ -58,16 +55,21 @@
 		</copy>
 	</target>
 
-	<target name="dist" depends="compile" description="builds the distribution">
-	
+	<!-- creates the ircappender-x.x.jar -->
+	<target name="jar" depends="compile" description="builds the ircappender-x.x.jar">
 		<mkdir dir="build/dist"/>
-		<jar jarfile="ircappender.jar">
+		<jar jarfile="ircappender-${version}.jar">
 			<fileset dir="build/build/classes">
 				<include name="**/*"/>
 			</fileset>
 		</jar>
+	</target>
+	
+	<!-- creates the distribution, packing all requires files together -->
+	<target name="dist" depends="jar" description="builds the distribution">
+	
 
-		<zip destfile="build/dist/ircappender.zip">
+		<zip destfile="build/dist/ircappender-src-${version}.zip">
 			<fileset dir=".">
 				<exclude name="build/**"/>
 				<exclude name="classes/**"/>

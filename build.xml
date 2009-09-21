@@ -64,7 +64,7 @@
 			</fileset>
 		</jar>
 	</target>
-	
+
 	<!-- creates the distribution, packing all requires files together -->
 	<target name="dist" depends="jar" description="builds the distribution">
 

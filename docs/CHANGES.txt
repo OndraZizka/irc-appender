@@ -1,12 +1,16 @@
 version 0.3
 -----------
-Release date:
+Release date: 2009-09-21
+* created a small binary only distribution in addition to the complete one (fixes #2862528)
 * added a build script (fixes #2862299)
 * delay between massages can be configured now (defaults to 1 second).
   Do not set it to a lower value on public irc-serves.
+* don't mess with stdout unless there is an error
 * output of sent data is now optional
 * deactivated debug option on default
 * added a very simple test application
+
+
 
 version 0.2
 ------------

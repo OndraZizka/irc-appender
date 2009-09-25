@@ -65,9 +65,11 @@
 		</jar>
 	</target>
 
+
 	<!-- creates the distribution, packing all requires files together -->
 	<target name="dist" depends="jar" description="builds the distribution">
 
+		<!-- create minimal version of the distribution -->
 		<zip destfile="build/dist/ircappender-bin-${version}.zip">
 			<fileset dir=".">
 				<include name="ircappender-${version}.jar"/>
@@ -77,6 +79,7 @@
 			</fileset>
 		</zip>	
 
+		<!-- complete version of the distribution -->
 		<zip destfile="build/dist/ircappender-src-${version}.zip">
 			<fileset dir=".">
 				<exclude name="build/**"/>

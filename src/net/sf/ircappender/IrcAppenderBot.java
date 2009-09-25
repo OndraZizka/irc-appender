@@ -49,7 +49,6 @@ public class IrcAppenderBot extends PircBot implements Runnable {
 
 	/**
 	 * Constructs the PIRCBOT then calls setName with a default of Log4JChatBot 
-	 * @param varNickname The name the bot should use
 	 */
 	public IrcAppenderBot() {
 		this.setName("Log4JChatBot");
@@ -177,11 +176,12 @@ public class IrcAppenderBot extends PircBot implements Runnable {
 	 * Sets the eventQue.
 	 * @param eventQue The eventQue to set
 	 */
-	public void setEventQue(Fifo vareventQue) {
-		this.eventQue = vareventQue;
+	public void setEventQue(Fifo eventQue) {
+		this.eventQue = eventQue;
 	}
 
 	/**
+	 * get channel
 	 * @return String
 	 */
 	public String getChannel() {

@@ -21,7 +21,10 @@ import java.util.Vector;
 import org.apache.log4j.spi.LoggingEvent;
 
 /**
- * A first in, first out buffer
+ * A first in, first out buffer.
+ *
+ * Note: This implementation is threadsafe with the only exception
+ * that you may end up with more elements than the limit in the queue.
  *
  * @author nhnb
  */

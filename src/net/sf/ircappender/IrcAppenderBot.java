@@ -23,7 +23,7 @@ import org.jibble.pircbot.User;
 /**
  * @author W B Chmura
  */
-public class IrcAppenderBot extends PircBot implements Runnable {
+class IrcAppenderBot extends PircBot implements Runnable {
 
 	private boolean isRunning;
 

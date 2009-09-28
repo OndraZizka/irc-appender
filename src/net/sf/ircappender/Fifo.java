@@ -28,7 +28,7 @@ import org.apache.log4j.spi.LoggingEvent;
  *
  * @author nhnb
  */
-public class Fifo {
+class Fifo {
 
 	/** remove the oldest element if the fifo is full */
 	public static final int AUTOPOP = 1;

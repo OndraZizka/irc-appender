@@ -28,6 +28,8 @@ public class IrcAppender extends AppenderSkeleton {
 
 	private String host;
 
+	private int port = 6667;
+
 	private String username;
 
 	private String password;
@@ -102,9 +104,9 @@ public class IrcAppender extends AppenderSkeleton {
 		try {
 
 			if (password == null) {
-				bot.connect(this.getHost(), 6667);
+				bot.connect(this.getHost(), this.getPort());
 			} else {
-				bot.connect(this.getHost(), 6667, this.getPassword());
+				bot.connect(this.getHost(), this.getPort(), this.getPassword());
 			}
 
 			bot.joinChannel("#" + this.getChannel());
@@ -179,6 +181,15 @@ public class IrcAppender extends AppenderSkeleton {
 	}
 
 	/**
+	 * Returns the configured irc server port
+	 *
+	 * @return int
+	 */
+	public int getPort() {
+		return port;
+	}
+
+	/**
 	 * @return String
 	 */
 	public String getPassword() {
@@ -215,6 +226,15 @@ public class IrcAppender extends AppenderSkeleton {
 	 */
 	public void setHost(String host) {
 		this.host = host;
+	}
+
+	/**
+	 * Sets the irc server port
+	 *
+	 * @param port port
+	 */
+	public void setPort(int port) {
+		this.port = port;
 	}
 
 	/**

@@ -1,7 +1,7 @@
 Version 0.4
 -----------
 Release date: ..........
-
+* added configuration setting "port" (default 6667)
 
 
 Version 0.3

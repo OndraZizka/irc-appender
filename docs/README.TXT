@@ -17,14 +17,14 @@ log4j.appender.irc.host=irchostname.com
 log4j.appender.irc.port=6667
 log4j.appender.irc.username=log4jchat
 log4j.appender.irc.password=password if needed
-log4j.appender.irc.channel=log4jchatchannel
+log4j.appender.irc.channel=#log4jchatchannel
 log4j.appender.irc.buffersize=1000
 log4j.appender.irc.buffertype=autopop
 log4j.appender.irc.nickname=logtester
 log4j.appender.irc.Threshold=ERROR
 
 buffersize:  This is the number of logging entries to hold at any given time.  
-channel: a "#" is added automatically
+
 
 
 

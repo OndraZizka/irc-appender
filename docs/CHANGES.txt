@@ -2,7 +2,7 @@ Version 0.4
 -----------
 Release date: ..........
 * added configuration setting "port" (default 6667)
-
+* now the "#" is added in front of the channel name only if there is not already one
 
 Version 0.3
 -----------

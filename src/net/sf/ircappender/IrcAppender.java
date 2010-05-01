@@ -109,13 +109,13 @@ public class IrcAppender extends AppenderSkeleton {
 				bot.connect(this.getHost(), this.getPort(), this.getPassword());
 			}
 
-			bot.joinChannel("#" + this.getChannel());
+			bot.joinChannel(this.getChannel());
 
 		} catch (Exception e) {
 			System.out.println("Exception: " + e.getMessage());
 		}
 
-		bot.setChannel("#" + this.getChannel());
+		bot.setChannel(this.getChannel());
 
 		return (bot);
 
@@ -169,6 +169,9 @@ public class IrcAppender extends AppenderSkeleton {
 	 * @return String
 	 */
 	public String getChannel() {
+		if ((channel != null) && !channel.startsWith("#")) {
+			channel = "#" + channel;
+		}
 		return channel;
 	}
 

@@ -21,10 +21,10 @@ log4j.appender.irc.channel=log4jchatchannel
 log4j.appender.irc.buffersize=1000
 log4j.appender.irc.buffertype=autopop
 log4j.appender.irc.nickname=logtester
-
+log4j.appender.irc.Threshold=ERROR
 
 buffersize:  This is the number of logging entries to hold at any given time.  
-
+channel: a "#" is added automatically
 
 
 

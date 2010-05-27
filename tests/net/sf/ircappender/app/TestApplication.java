@@ -16,7 +16,6 @@ public class TestApplication {
 	/**
 	 * initializes log4j with a custom properties file.
 	 *
-	 * @param filename log4j.properties
 	 * @throws IOException 
 	 */
 	public static void init() throws IOException {

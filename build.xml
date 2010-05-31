@@ -9,7 +9,7 @@
 
 	<!-- *** define variables *** -->
 
-	<property name="version" value="0.4" />
+	<property name="version" value="0.5" />
 
 
 	<property name="build" value="build/dist" />

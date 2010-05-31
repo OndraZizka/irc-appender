@@ -204,4 +204,20 @@ class IrcAppenderBot extends PircBot implements Runnable {
 		this.logChannel = channel;
 	}
 
+	protected void onDisconnect() {
+		super.onDisconnect();
+		final Thread t = new Thread("IrcAppenderBot: wait for reconnect") {
+
+			public void run() {
+				try {
+					Thread.sleep(60 * 1000);
+					reconnect();
+				} catch (final Exception e) {
+					// not good
+				}
+			}
+		};
+		t.setDaemon(true);
+		t.start();
+	}
 }

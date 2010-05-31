@@ -1,8 +1,9 @@
 Version 0.4
 -----------
-Release date: ..........
+Release date: 2010-05-31
 * added configuration setting "port" (default 6667)
 * now the "#" is added in front of the channel name only if there is not already one
+* automatic reconnect
 
 Version 0.3
 -----------

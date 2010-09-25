@@ -48,6 +48,15 @@ this yet.
 
 
 
+CONTACT:
+
+Website: http://sourceforge.net/projects/ircappender
+
+Download: http://sourceforge.net/projects/ircappender/files
+
+Bug-Reports and Feature Requests:
+http://sourceforge.net/tracker/?group_id=76057&atid=545921
+
 
 
 CREDITS:

@@ -1,5 +1,5 @@
 /*
-   Copyright 2003-2009 IrcAppender project
+   Copyright 2003-2011 IrcAppender project
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -21,6 +21,8 @@ import org.jibble.pircbot.PircBot;
 import org.jibble.pircbot.User;
 
 /**
+ * the IRC bot used by IrcAppender
+ *
  * @author W B Chmura
  */
 class IrcAppenderBot extends PircBot implements Runnable {
@@ -38,17 +40,17 @@ class IrcAppenderBot extends PircBot implements Runnable {
 	private LoggingEvent le;
 
 	/**
-	 * Constructs the PIRCBOT then calls setName
-	 * @param varNickname The name the bot should use
+	 * Constructs the PIRCBOT then sets the nickname
+	 *
+	 * @param nickname The name the bot should use
 	 */
-	public IrcAppenderBot(String varNickname) {
-		super();
-		this.setName(varNickname);
+	public IrcAppenderBot(String nickname) {
+		this.setName(nickname);
 	}
 
 
 	/**
-	 * Constructs the PIRCBOT then calls setName with a default of Log4JChatBot 
+	 * Constructs the PIRCBOT then calls setName with a default of Log4JChatBot
 	 */
 	public IrcAppenderBot() {
 		this.setName("Log4JChatBot");
@@ -92,7 +94,7 @@ class IrcAppenderBot extends PircBot implements Runnable {
 				Thread.sleep(this.getMessageDelay());
 			} catch (Exception e) {
 				System.out.println("IrcAppenderBot exception " + e.getMessage());
-			} //End try			
+			} //End try
 
 		}
 
@@ -125,7 +127,8 @@ class IrcAppenderBot extends PircBot implements Runnable {
 
 
 	/**
-	 * Checks the channel user list to see if there are less than two users registered. 
+	 * Checks the channel user list to see if there are less than two users registered.
+	 *
 	 * @param channel The channel name to check
 	 * @return boolean true if there are more than one users in the channel
 	 */
@@ -158,6 +161,7 @@ class IrcAppenderBot extends PircBot implements Runnable {
 
 	/**
 	 * Returns the running state of the thread
+	 *
 	 * @return boolean
 	 */
 	public boolean isRunning() {
@@ -166,6 +170,7 @@ class IrcAppenderBot extends PircBot implements Runnable {
 
 	/**
 	 * Sets the isRunning.
+	 *
 	 * @param isRunning The isRunning to set
 	 */
 	public void setRunning(boolean isRunning) {
@@ -173,16 +178,18 @@ class IrcAppenderBot extends PircBot implements Runnable {
 	}
 
 	/**
-	 * Sets the eventQue.
-	 * @param eventQue The eventQue to set
+	 * Sets the event queue.
+	 *
+	 * @param eventQue The event queue to set
 	 */
 	public void setEventQue(Fifo eventQue) {
 		this.eventQue = eventQue;
 	}
 
 	/**
-	 * get channel
-	 * @return String
+	 * gets the channel name
+	 *
+	 * @return channel
 	 */
 	public String getChannel() {
 		return logChannel;
@@ -190,6 +197,7 @@ class IrcAppenderBot extends PircBot implements Runnable {
 
 	/**
 	 * Sets the debug flag
+	 *
 	 * @param debug debug flag
 	 */
 	public void setDebug(boolean debug) {
@@ -198,12 +206,16 @@ class IrcAppenderBot extends PircBot implements Runnable {
 
 	/**
 	 * Sets the channel.
+	 *
 	 * @param channel The channel to set
 	 */
 	public void setChannel(String channel) {
 		this.logChannel = channel;
 	}
 
+	/**
+	 * handles disconnections by automatically reconnecting after one minute.
+	 */
 	protected void onDisconnect() {
 		super.onDisconnect();
 		final Thread t = new Thread("IrcAppenderBot: wait for reconnect") {

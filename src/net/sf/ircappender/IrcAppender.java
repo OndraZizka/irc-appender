@@ -1,5 +1,5 @@
 /*
-   Copyright 2003-2009 IrcAppender project
+   Copyright 2003-2011 IrcAppender project
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -123,8 +123,8 @@ public class IrcAppender extends AppenderSkeleton {
 
 
 
-	/** 
-	 * Recieves a LoggingEvent for handling.  Ignores if the appender is in the 
+	/**
+	 * Recieves a LoggingEvent for handling.  Ignores if the appender is in the
 	 * process of closing down.
 	 * @see org.apache.log4j.AppenderSkeleton#append(org.apache.log4j.spi.LoggingEvent)
 	 */
@@ -134,16 +134,17 @@ public class IrcAppender extends AppenderSkeleton {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.apache.log4j.Appender#requiresLayout()
+	/**
+	 * no layout required
 	 */
 	public boolean requiresLayout() {
-		return (false);
+		return false;
 	}
 
-	/** 
+	/**
 	 * Shuts down the appender.  Handles telling the bot to close and waiting for the bot
 	 * to cleanly close its thread before continuing.
+	 *
 	 * @see org.apache.log4j.Appender#close()
 	 */
 	public void close() {
@@ -157,7 +158,8 @@ public class IrcAppender extends AppenderSkeleton {
 	}
 
 	/**
-	 * Returns the configured buffersize 
+	 * Returns the configured buffersize
+	 *
 	 * @return double
 	 */
 	public int getBuffersize() {
@@ -166,6 +168,7 @@ public class IrcAppender extends AppenderSkeleton {
 
 	/**
 	 * Returns the configured channel
+	 *
 	 * @return String
 	 */
 	public String getChannel() {
@@ -177,6 +180,7 @@ public class IrcAppender extends AppenderSkeleton {
 
 	/**
 	 * Returns the configured host
+	 *
 	 * @return String
 	 */
 	public String getHost() {
@@ -193,14 +197,18 @@ public class IrcAppender extends AppenderSkeleton {
 	}
 
 	/**
-	 * @return String
+	 * gets the IRC password
+	 *
+	 * @return password
 	 */
 	public String getPassword() {
 		return password;
 	}
 
 	/**
-	 * @return String
+	 * gets the IRC username
+	 *
+	 * @return username
 	 */
 	public String getUsername() {
 		return username;
@@ -208,6 +216,7 @@ public class IrcAppender extends AppenderSkeleton {
 
 	/**
 	 * Sets the buffersize.
+	 *
 	 * @param buffersize The buffersize to set
 	 */
 	public void setBuffersize(int buffersize) {
@@ -217,6 +226,7 @@ public class IrcAppender extends AppenderSkeleton {
 
 	/**
 	 * Sets the channel.
+	 *
 	 * @param channel The channel to set
 	 */
 	public void setChannel(String channel) {
@@ -225,6 +235,7 @@ public class IrcAppender extends AppenderSkeleton {
 
 	/**
 	 * Sets the host.
+	 *
 	 * @param host The host to set
 	 */
 	public void setHost(String host) {
@@ -242,6 +253,7 @@ public class IrcAppender extends AppenderSkeleton {
 
 	/**
 	 * Sets the password.
+	 *
 	 * @param password The password to set
 	 */
 	public void setPassword(String password) {
@@ -250,6 +262,7 @@ public class IrcAppender extends AppenderSkeleton {
 
 	/**
 	 * Sets the username.
+	 *
 	 * @param username The username to set
 	 */
 	public void setUsername(String username) {
@@ -257,6 +270,8 @@ public class IrcAppender extends AppenderSkeleton {
 	}
 
 	/**
+	 * gets the name of the buffer strategy
+	 *
 	 * @return String
 	 */
 	public String getBuffertype() {
@@ -264,7 +279,8 @@ public class IrcAppender extends AppenderSkeleton {
 	}
 
 	/**
-	 * Sets the buffertype.
+	 * Sets the buffer strategy.
+	 *
 	 * @param buffertype The buffertype to set
 	 */
 	public void setBuffertype(String buffertype) {
@@ -272,7 +288,9 @@ public class IrcAppender extends AppenderSkeleton {
 	}
 
 	/**
-	 * @return String
+	 * gets the IRC nickname of the bot
+	 *
+	 * @return nickname
 	 */
 	public String getNickname() {
 		return nickname;
@@ -280,6 +298,7 @@ public class IrcAppender extends AppenderSkeleton {
 
 	/**
 	 * Sets the nickname.
+	 *
 	 * @param nickname The nickname to set
 	 */
 	public void setNickname(String nickname) {
@@ -287,7 +306,8 @@ public class IrcAppender extends AppenderSkeleton {
 	}
 
 	/**
-	* Set the delay between messages
+	* Set the delay between messages. Note that some IRC servers have a rate limit which may be stricter.
+	*
 	* @param messageDelay in milliseconds
 	*/
 	public void setMessageDelay(long messageDelay) {
@@ -295,7 +315,9 @@ public class IrcAppender extends AppenderSkeleton {
 	}
 
 	/**
-	 * @return long
+	 * gets the delay between multiple messages
+	 *
+	 * @return long delay in milliseconds
 	 */
 	public long getMessageDelay() {
 		return messageDelay;

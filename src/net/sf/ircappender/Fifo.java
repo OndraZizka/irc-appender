@@ -1,5 +1,5 @@
 /*
-   Copyright 2003-2009 IrcAppender project
+   Copyright 2003-2011 IrcAppender project
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -38,15 +38,15 @@ class Fifo {
 
 
 	/** storage of elements */
-	private Vector elements = new Vector();
+	private final Vector elements = new Vector();
 
 	/** maximum number of elements to store */
-	private int bufferSize;
+	private final int bufferSize;
 
 	/** what to do if the buffer is full (AUTOPOP or REFUSE) */
 	// Note: log4j is compatible with Java 1.1.x and we aim for the same goal.
 	//       so we cannot use enumeration (Java 1.5) here.
-	private int fullStrategy;
+	private final int fullStrategy;
 
 	/**
 	 * creates a new Fifo

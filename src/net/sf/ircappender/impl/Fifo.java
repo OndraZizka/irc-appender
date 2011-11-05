@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-package net.sf.ircappender;
+package net.sf.ircappender.impl;
 
 import java.util.NoSuchElementException;
 import java.util.Vector;
@@ -28,7 +28,7 @@ import org.apache.log4j.spi.LoggingEvent;
  *
  * @author nhnb
  */
-class Fifo {
+public class Fifo {
 
 	/** remove the oldest element if the fifo is full */
 	public static final int AUTOPOP = 1;

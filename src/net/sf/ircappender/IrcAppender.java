@@ -16,6 +16,9 @@
  */
 package net.sf.ircappender;
 
+import net.sf.ircappender.impl.Fifo;
+import net.sf.ircappender.impl.IrcAppenderBot;
+
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.spi.LoggingEvent;
 

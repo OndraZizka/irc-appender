@@ -14,7 +14,7 @@
    limitations under the License.
 
  */
-package net.sf.ircappender;
+package net.sf.ircappender.impl;
 
 import org.apache.log4j.spi.LoggingEvent;
 import org.jibble.pircbot.PircBot;
@@ -25,7 +25,7 @@ import org.jibble.pircbot.User;
  *
  * @author W B Chmura
  */
-class IrcAppenderBot extends PircBot implements Runnable {
+public class IrcAppenderBot extends PircBot implements Runnable {
 
 	private boolean isRunning;
 

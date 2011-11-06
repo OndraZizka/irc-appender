@@ -80,6 +80,7 @@
 		<!-- complete version of the distribution -->
 		<zip destfile="build/dist/ircappender-src-${version}.zip">
 			<fileset dir=".">
+				<exclude name=".git/**" />
 				<exclude name="build/**"/>
 				<exclude name="classes/**"/>
 			</fileset>

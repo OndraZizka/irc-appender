@@ -74,8 +74,6 @@
 			<fileset dir=".">
 				<include name="ircappender-${version}.jar"/>
 				<include name="docs/**"/>
-				<include name="libs/pircbot-LICENSE.txt"/>
-				<include name="libs/pircbot.jar"/>
 			</fileset>
 		</zip>	
 

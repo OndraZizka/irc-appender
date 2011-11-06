@@ -15,6 +15,7 @@ In your application, you need to add the following to your log4j properties file
 log4j.appender.irc=net.sf.ircappender.IrcAppender
 log4j.appender.irc.host=irchostname.com
 log4j.appender.irc.port=6667
+log4j.appender.irc.ssl=false
 log4j.appender.irc.username=log4jchat
 log4j.appender.irc.password=password if needed
 log4j.appender.irc.channel=#log4jchatchannel
@@ -56,12 +57,4 @@ Download: http://sourceforge.net/projects/ircappender/files
 
 Bug-Reports and Feature Requests:
 http://sourceforge.net/tracker/?group_id=76057&atid=545921
-
-
-
-CREDITS:
-
-* Paul Mutton - Creator of PIRCBOT upon which all direct IRC interaction 
-in this program is handled.  The PIRCBOT is freely available at
-http://www.jibble.org/pircbot.php
 

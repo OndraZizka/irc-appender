@@ -8,7 +8,6 @@
 			<attribute name="javadoc_location" value="http://logging.apache.org/log4j/1.2/apidocs/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="libs/pircbot.jar" sourcepath="libs/pircbot-src.jar"/>
 	<classpathentry kind="lib" path="libs/junit.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

@@ -19,6 +19,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * detects that the requested nickname was accepted by the server
  *
  * @author hendrik
  */

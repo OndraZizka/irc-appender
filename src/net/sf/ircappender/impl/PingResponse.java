@@ -19,6 +19,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * handles ping request from the IRC server by sending a pong response
  *
  * @author hendrik
  */

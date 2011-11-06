@@ -18,24 +18,26 @@ package net.sf.ircappender.impl;
 import java.util.Iterator;
 
 /**
+ * dispatches responses sent by the IRC server to the handlers dealing with them
  *
  * @author hendrik
  */
 class IrcResponseDispatcher implements Runnable {
 
-
-	/**
-	 *
-	 */
 	private final IrcConnection ircConnection;
 
 	/**
-	 * @param ircConnection
+	 * creates a new IrcResponseDispatcher
+	 *
+	 * @param ircConnection irc connection.
 	 */
 	IrcResponseDispatcher(IrcConnection ircConnection) {
 		this.ircConnection = ircConnection;
 	}
 
+	/**
+	 * a thread reading messages from the IRC server
+	 */
 	public void run() {
 		ircConnection.isRunning = true;
 		try {

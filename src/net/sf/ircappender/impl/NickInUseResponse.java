@@ -19,6 +19,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * detects that the requested nickname is already in use by someone else.
  *
  * @author hendrik
  */

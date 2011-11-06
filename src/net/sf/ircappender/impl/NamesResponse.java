@@ -20,6 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * keeps track of the members already in the channel when the bot joins
  *
  * @author hendrik
  */

@@ -18,6 +18,7 @@ package net.sf.ircappender.impl;
 import org.apache.log4j.spi.LoggingEvent;
 
 /**
+ * forwards log events from the queue to the IRC connection
  *
  * @author hendrik
  */
@@ -27,8 +28,14 @@ public class LogToIrcForwarder implements Runnable {
 	private final long messageDelay;
 	private final String channel;
 
+
 	/**
-	 * @param eventQueue
+	 * creates a new LogToIrcForwarder
+	 *
+	 * @param ircConnection the irc connection to send messages to
+	 * @param eventQueue    the event queue with log events to process
+	 * @param messageDelay  the delay between messages to prevent excess flood kills
+	 * @param channel       the channel to post to
 	 */
 	public LogToIrcForwarder(IrcConnection ircConnection, Fifo eventQueue, long messageDelay, String channel) {
 		this.ircConnection = ircConnection;
@@ -37,22 +44,23 @@ public class LogToIrcForwarder implements Runnable {
 		this.channel = channel;
 	}
 
+	/**
+	 * a thread forwarding messages from the log event queue to IRC
+	 */
 	public void run() {
 
 		while (ircConnection.isRunning()) {
-			if (!ircConnection.isRoomEmpty()) {
-				if (!(eventQueue == null) && !eventQueue.isEmpty()) {
-					transferEntry();
-				}
-				try {
-					Thread.sleep(messageDelay);
-				} catch (Exception e) {
-					// ignore
-				}
+			if (!(eventQueue == null) && !eventQueue.isEmpty()) {
+				transferEntry();
+			}
+			try {
+				Thread.sleep(messageDelay);
+			} catch (Exception e) {
+				// ignore
 			}
 		}
 
-		while (!eventQueue.isEmpty() && !ircConnection.isRoomEmpty()) {
+		while (!eventQueue.isEmpty() && !ircConnection.isChannelEmpty()) {
 			transferEntry();
 		}
 	}
@@ -67,7 +75,9 @@ public class LogToIrcForwarder implements Runnable {
 		if (temp == null) {
 			temp = "";
 		}
-		ircConnection.sendMessage(channel, temp.toString());
+		if (!ircConnection.isChannelEmpty()) {
+			ircConnection.sendMessage(channel, temp.toString());
+		}
 	}
 
 }

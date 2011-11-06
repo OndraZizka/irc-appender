@@ -89,6 +89,12 @@ public class IrcConnection {
 		this.members = new HashSet();
 	}
 
+	/**
+	 * connects to the specified IRC server
+	 *
+	 * @throws UnknownHostException in case of an invalid irc server name
+	 * @throws IOException in case of an unexpected input/output error
+	 */
 	public void connect() throws UnknownHostException, IOException {
 		this.waitingForReconnect = false;
 		if (this.ssl) {
@@ -132,6 +138,9 @@ public class IrcConnection {
 		}
 	}
 
+	/**
+	 * logs in to IRC
+	 */
 	public void login() {
 		if (password != null) {
 			send("PASS " + password);
@@ -144,6 +153,12 @@ public class IrcConnection {
 		send("USER " + username + " \"\" \"\" \"\"");
 	}
 
+	/**
+	 * sends a message to a channel or nickname
+	 *
+	 * @param target   channel or nickname to send to
+	 * @param message  message to send
+	 */
 	public void sendMessage(String target, String message) {
 		send("PRIVMSG " + target + " :" + message);
 	}
@@ -169,7 +184,12 @@ public class IrcConnection {
 		members.remove(member);
 	}
 
-	public boolean isRoomEmpty() {
+	/**
+	 * checks whether the channel is empty
+	 *
+	 * @return true, if only the bot is in the channel
+	 */
+	public boolean isChannelEmpty() {
 		// ignore ourself
 		return members.size() <= 1;
 	}
@@ -207,6 +227,13 @@ public class IrcConnection {
 		send("NICK " + currentNick);
 	}
 
+	/**
+	 * handles the acceptance of the nick name.
+	 *
+	 * This method will check if the nick name is the desired one and join the channel.
+	 * If the nickname is different, it will try to get nickserv to kill the other connection
+	 * which is using the nickname.
+	 */
 	public void onNickAccepted() {
 		if (!currentNick.equals(nick) && (password != null)) {
 			sendMessage("NickServ", "ghost " + nick + " " + password);

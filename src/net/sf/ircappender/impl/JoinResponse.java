@@ -19,6 +19,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * handles people joning the channel to keep track of the members
  *
  * @author hendrik
  */

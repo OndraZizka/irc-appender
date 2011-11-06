@@ -54,7 +54,7 @@ public class IrcAppender extends AppenderSkeleton {
 
 	private boolean isClosing;
 
-	private Fifo eventQue = null;
+	private Fifo eventQueue = null;
 
 	private IrcConnection irc = null;
 
@@ -63,9 +63,6 @@ public class IrcAppender extends AppenderSkeleton {
 	 */
 	public IrcAppender() {
 		super();
-		if (debug) {
-			System.out.println("Irc Appender constructing");
-		}
 	}
 
 
@@ -80,15 +77,15 @@ public class IrcAppender extends AppenderSkeleton {
 		}
 
 		if (buffertype.equalsIgnoreCase("autopop")) {
-			eventQue = new Fifo(buffersize, Fifo.AUTOPOP);
+			eventQueue = new Fifo(buffersize, Fifo.AUTOPOP);
 		} else if (buffertype.equalsIgnoreCase("refuse")) {
-			eventQue = new Fifo(buffersize, Fifo.REFUSE);
+			eventQueue = new Fifo(buffersize, Fifo.REFUSE);
 		} else {
-			eventQue = new Fifo(buffersize, Fifo.AUTOPOP);
+			eventQueue = new Fifo(buffersize, Fifo.AUTOPOP);
 		}
 
 		irc = doIrcBotInitialization();
-		irc.setEventQueue(eventQue);
+		irc.setEventQueue(eventQueue);
 		try {
 			irc.connect();
 			irc.login();
@@ -120,7 +117,7 @@ public class IrcAppender extends AppenderSkeleton {
 	 */
 	protected void append(LoggingEvent arg0) {
 		if (!isClosing) {
-			eventQue.add(arg0);
+			eventQueue.add(arg0);
 		}
 	}
 

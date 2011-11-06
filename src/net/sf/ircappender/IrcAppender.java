@@ -16,8 +16,11 @@
  */
 package net.sf.ircappender;
 
+import java.io.IOException;
+import java.net.UnknownHostException;
+
 import net.sf.ircappender.impl.Fifo;
-import net.sf.ircappender.impl.IrcAppenderBot;
+import net.sf.ircappender.impl.IrcConnection;
 
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.spi.LoggingEvent;
@@ -32,6 +35,8 @@ public class IrcAppender extends AppenderSkeleton {
 	private String host;
 
 	private int port = 6667;
+
+	private boolean ssl = false;
 
 	private String username;
 
@@ -51,7 +56,7 @@ public class IrcAppender extends AppenderSkeleton {
 
 	private Fifo eventQue = null;
 
-	private IrcAppenderBot abt = null;
+	private IrcConnection abt = null;
 
 	private Thread botThread;
 
@@ -85,43 +90,27 @@ public class IrcAppender extends AppenderSkeleton {
 		}
 
 		abt = doIrcBotInitialization();
-		abt.setEventQue(eventQue);
-		botThread = new Thread(abt);
-		botThread.start();
+		abt.setEventQueue(eventQue);
+		try {
+			abt.connect();
+			abt.login();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
 	 * Handles the initialization of the IrcBot object
+	 *
 	 * @return IrcAppenderBot the Initialized bot
 	 */
-	private IrcAppenderBot doIrcBotInitialization() {
-
-		IrcAppenderBot bot = new IrcAppenderBot(nickname);
-
-		bot.setVerbose(debug);
+	private IrcConnection doIrcBotInitialization() {
+		IrcConnection bot = new IrcConnection(host, port, ssl, username, password, nickname, channel);
 		bot.setDebug(debug);
-
 		bot.setMessageDelay(messageDelay);
-		bot.changeNick(nickname);
-
-		try {
-
-			if (password == null) {
-				bot.connect(this.getHost(), this.getPort());
-			} else {
-				bot.connect(this.getHost(), this.getPort(), this.getPassword());
-			}
-
-			bot.joinChannel(this.getChannel());
-
-		} catch (Exception e) {
-			System.out.println("Exception: " + e.getMessage());
-		}
-
-		bot.setChannel(this.getChannel());
-
-		return (bot);
-
+		return bot;
 	}
 
 
@@ -198,6 +187,25 @@ public class IrcAppender extends AppenderSkeleton {
 	public int getPort() {
 		return port;
 	}
+
+	/**
+	 * Is SSL used to secure the connection to the IRC server?
+	 *
+	 * @return ssl ussage
+	 */
+	public boolean isSsl() {
+		return ssl;
+	}
+
+	/**
+	 * Enables or disables the use of SSL for the IRC connection
+	 *
+	 * @param ssl true to enable SSL security
+	 */
+	public void setSsl(boolean ssl) {
+		this.ssl = ssl;
+	}
+
 
 	/**
 	 * gets the IRC password

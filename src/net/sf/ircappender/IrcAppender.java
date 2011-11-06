@@ -30,7 +30,7 @@ import org.apache.log4j.spi.LoggingEvent;
  */
 public class IrcAppender extends AppenderSkeleton {
 
-	private static final boolean debug = false;
+	private boolean debug = false;
 
 	private String host;
 
@@ -56,9 +56,7 @@ public class IrcAppender extends AppenderSkeleton {
 
 	private Fifo eventQue = null;
 
-	private IrcConnection abt = null;
-
-	private Thread botThread;
+	private IrcConnection irc = null;
 
 	/**
 	 * Calls the superclass constructor.  No other logic at this time
@@ -89,11 +87,11 @@ public class IrcAppender extends AppenderSkeleton {
 			eventQue = new Fifo(buffersize, Fifo.AUTOPOP);
 		}
 
-		abt = doIrcBotInitialization();
-		abt.setEventQueue(eventQue);
+		irc = doIrcBotInitialization();
+		irc.setEventQueue(eventQue);
 		try {
-			abt.connect();
-			abt.login();
+			irc.connect();
+			irc.login();
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -141,12 +139,9 @@ public class IrcAppender extends AppenderSkeleton {
 	 */
 	public void close() {
 		isClosing = true;
-		abt.setRunning(false);
-		try {
-			botThread.join();
-		} catch (Exception e) {
-			System.out.println("Exception on close join thing " + e.getMessage());
-		}
+		irc.setRunning(false);
+		irc.waitForForwardThreadToFinish();
+		irc.disconnect();
 	}
 
 	/**
@@ -169,6 +164,25 @@ public class IrcAppender extends AppenderSkeleton {
 		}
 		return channel;
 	}
+
+	/**
+	 * is debugging enabled
+	 *
+	 * @return true, if debugging is enabled, false otherwise
+	 */
+	public boolean isDebug() {
+		return debug;
+	}
+
+	/**
+	 * enables or disables debugging messages
+	 *
+	 * @param debug should debug message be written to stdout?
+	 */
+	public void setDebug(boolean debug) {
+		this.debug = debug;
+	}
+
 
 	/**
 	 * Returns the configured host

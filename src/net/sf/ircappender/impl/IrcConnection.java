@@ -54,6 +54,7 @@ public class IrcConnection {
 	private int nickCounter = 0;
 	private long messageDelay = 1000;
 
+	Thread forwarderThread = null;
 	boolean waitingForReconnect = false;
 	boolean debug = false;
 	boolean isRunning;
@@ -82,6 +83,7 @@ public class IrcConnection {
 		this.handlers = new LinkedList();
 		handlers.add(new JoinResponse());
 		handlers.add(new NamesResponse());
+		handlers.add(new NameListCompleteResponse());
 		handlers.add(new NickAcceptedResponse());
 		handlers.add(new NickInUseResponse());
 		handlers.add(new PartResponse());
@@ -102,12 +104,14 @@ public class IrcConnection {
 		} else {
 			socket = new Socket(server, port);
 		}
+		members.clear();
 		currentNick = nick;
 		input = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 		output = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"));
 
-		new Thread(new IrcResponseDispatcher(this)).start();
-		new Thread(new LogToIrcForwarder(this, eventQueue, messageDelay, channel)).start();
+		Thread thread = new Thread(new IrcResponseDispatcher(this), "IrcAppender: Reader");
+		thread.setDaemon(true);
+		thread.start();
 	}
 
 	/**
@@ -249,6 +253,15 @@ public class IrcConnection {
 	}
 
 	/**
+	 * starts the forwarder thread
+	 */
+	public void onChannelJoined() {
+		forwarderThread = new Thread(new LogToIrcForwarder(this, eventQueue, messageDelay, channel), "IrcAppender: Writer");
+		forwarderThread.setDaemon(true);
+		forwarderThread.start();
+	}
+
+	/**
 	 * Sets the debug flag
 	 *
 	 * @param debug debug flag
@@ -291,5 +304,18 @@ public class IrcConnection {
 	 */
 	public void setMessageDelay(long messageDelay) {
 		this.messageDelay = messageDelay;
+	}
+
+	/**
+	 * waits for the forwarder thread to finish
+	 */
+	public void waitForForwardThreadToFinish() {
+		if (forwarderThread != null) {
+			try {
+				forwarderThread.join();
+			} catch (InterruptedException e) {
+				// ignore
+			}
+		}
 	}
 }

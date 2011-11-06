@@ -51,7 +51,7 @@ this yet.
 
 CONTACT:
 
-Website: http://sourceforge.net/projects/ircappender
+Website: http://ircappender.sourceforge.net
 
 Download: http://sourceforge.net/projects/ircappender/files
 

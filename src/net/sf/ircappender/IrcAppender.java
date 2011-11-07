@@ -58,13 +58,6 @@ public class IrcAppender extends AppenderSkeleton {
 
 	private IrcConnection irc = null;
 
-	/**
-	 * Calls the superclass constructor.  No other logic at this time
-	 */
-	public IrcAppender() {
-		super();
-	}
-
 
 	/**
 	 * Initializes the system after the options are set
@@ -113,11 +106,19 @@ public class IrcAppender extends AppenderSkeleton {
 	/**
 	 * Recieves a LoggingEvent for handling.  Ignores if the appender is in the
 	 * process of closing down.
+	 *
 	 * @see org.apache.log4j.AppenderSkeleton#append(org.apache.log4j.spi.LoggingEvent)
 	 */
-	protected void append(LoggingEvent arg0) {
+	protected void append(LoggingEvent le) {
 		if (!isClosing) {
-			eventQueue.add(arg0);
+			String temp;
+			Object object = le.getMessage();
+			if (object == null) {
+				temp = "";
+			} else {
+				temp = object.toString();
+			}
+			eventQueue.add(temp);
 		}
 	}
 

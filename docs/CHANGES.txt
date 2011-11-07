@@ -1,5 +1,7 @@
 Version 0.5
 -----------
+* added support for java.util.logging in addition to log4j
+* added support for SSL connections
 * replaced very old version of PircBot with an extremely simple self written IRC client
 
 Version 0.4

@@ -16,12 +16,15 @@ public class JulApplication {
 	/**
 	 * initializes jul
 	 *
-	 * @throws IOException
+	 * @throws IOException in case of an input output error
 	 */
 	public static void init() throws IOException {
 		InputStream is = JulApplication.class.getResourceAsStream("jul.properties");
-		LogManager.getLogManager().readConfiguration(is);
-		is.close();
+		try {
+			LogManager.getLogManager().readConfiguration(is);
+		} finally {
+			is.close();
+		}
 	}
 
 	/**

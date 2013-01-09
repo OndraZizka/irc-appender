@@ -1,5 +1,5 @@
 /*
-   Copyright 2011 Faiumoni e. V.
+   Copyright 2011-2013 Faiumoni e. V.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ import java.util.regex.Pattern;
 class NickInUseResponse implements IRCResponseHandler {
 
 	// < :verne.freenode.net 433 * postman-bot-TEST :Nickname is already in use.
-	// private final Pattern pattern = Pattern.compile("(?i):[^ ]* 433 [*] ([^ ]*).*");
 	private final Pattern pattern = Pattern.compile("(?i):[^ ]* 433 .*");
 
 	public void handleResponse(IrcConnection ircConnection, String line) {

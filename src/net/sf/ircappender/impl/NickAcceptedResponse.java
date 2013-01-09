@@ -1,5 +1,5 @@
 /*
-   Copyright 2011 Faiumoni e. V.
+   Copyright 2011-2013 Faiumoni e. V.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 class NickAcceptedResponse implements IRCResponseHandler {
 
 	//:sendak.freenode.net 001 a1postman-bot-TE :Welcome to the freenode Internet Relay Chat Network a1postman-bot-TE
-	private final Pattern pattern = Pattern.compile("(?i):[^ ]* 376 .*");
+	private final Pattern pattern = Pattern.compile("(?i):[^ ]* 001 .*");
 
 	public void handleResponse(IrcConnection ircConnection, String line) {
 		Matcher matcher = pattern.matcher(line);

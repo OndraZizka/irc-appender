@@ -1,5 +1,5 @@
 /*
-   Copyright 2011 Faiumoni e. V.
+   Copyright 2011-2013 Faiumoni e. V.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -71,7 +71,7 @@ public class LogToIrcForwarder implements Runnable {
 	private void transferEntry() {
 		String temp = eventQueue.pop();
 		if (!ircConnection.isChannelEmpty()) {
-			ircConnection.sendMessage(channel, temp.toString());
+			ircConnection.sendMessage(channel, temp);
 		}
 	}
 

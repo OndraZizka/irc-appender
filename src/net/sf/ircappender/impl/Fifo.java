@@ -18,7 +18,6 @@ package net.sf.ircappender.impl;
 import java.util.NoSuchElementException;
 import java.util.Vector;
 
-import org.apache.log4j.spi.LoggingEvent;
 
 /**
  * A first in, first out buffer.
@@ -65,8 +64,8 @@ public class Fifo {
 	 * @return oldest element
 	 * @throws NoSuchElementException in case the fifo is empty
 	 */
-	public LoggingEvent pop() throws NoSuchElementException {
-		return (LoggingEvent) elements.remove(0);
+	public String pop() throws NoSuchElementException {
+		return (String) elements.remove(0);
 	}
 
 	/**
@@ -75,7 +74,7 @@ public class Fifo {
 	 *
 	 * @param e element to add
 	 */
-	public void add(LoggingEvent e) {
+	public void add(String e) {
 		if (elements.size() < bufferSize) {
 			elements.add(e);
 

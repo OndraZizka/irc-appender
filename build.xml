@@ -9,7 +9,7 @@
 
 	<!-- *** define variables *** -->
 
-	<property name="version" value="0.5" />
+	<property name="version" value="0.6" />
 
 
 	<property name="build" value="build/dist" />
@@ -80,6 +80,7 @@
 		<!-- complete version of the distribution -->
 		<zip destfile="build/dist/ircappender-src-${version}.zip">
 			<fileset dir=".">
+				<exclude name=".git/**" />
 				<exclude name="build/**"/>
 				<exclude name="classes/**"/>
 			</fileset>

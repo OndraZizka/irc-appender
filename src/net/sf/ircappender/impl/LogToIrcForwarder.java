@@ -15,7 +15,6 @@
 */
 package net.sf.ircappender.impl;
 
-import org.apache.log4j.spi.LoggingEvent;
 
 /**
  * forwards log events from the queue to the IRC connection
@@ -70,11 +69,7 @@ public class LogToIrcForwarder implements Runnable {
 	 * Transfers one LoggingEvent Entry from the eventQue to the ircMessage que
 	*/
 	private void transferEntry() {
-		LoggingEvent le = eventQueue.pop();
-		Object temp = le.getMessage();
-		if (temp == null) {
-			temp = "";
-		}
+		String temp = eventQueue.pop();
 		if (!ircConnection.isChannelEmpty()) {
 			ircConnection.sendMessage(channel, temp.toString());
 		}

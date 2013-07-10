@@ -29,7 +29,6 @@
             <resource>
                 <directory>resources</directory>
                 <includes> <include>**/*</include> </includes>
-                <excludes> <exclude>**/*.java</exclude> </excludes>
             </resource>
         </resources>
 

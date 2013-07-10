@@ -4,13 +4,12 @@
 
    <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-      <project.version>1.0</project.version>
    </properties>
 
    <groupId>cz.oz.third.ircappender</groupId>
    <artifactId>IrcAppender</artifactId>
    <packaging>jar</packaging>
-   <version>1.0</version>
+   <version>0.5</version>
 
    <name>IRC Log4j Appender</name>
 

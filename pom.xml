@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <project.version>1.0</project.version>
+   </properties>
+
+   <groupId>cz.oz.third.ircappender</groupId>
+   <artifactId>IrcAppender</artifactId>
+   <packaging>jar</packaging>
+   <version>1.0</version>
+
+   <name>IRC Log4j Appender</name>
+
+
+   <build>
+
+        <sourceDirectory>src/main/java</sourceDirectory>
+
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes> <include>**/*</include> </includes>
+                <excludes> <exclude>**/*.java</exclude> </excludes>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>resources</directory>
+                <includes> <include>**/*</include> </includes>
+                <excludes> <exclude>**/*.java</exclude> </excludes>
+            </resource>
+        </resources>
+
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <includes> <include>**/*</include> </includes>
+            </testResource>
+        </testResources>
+
+    </build>
+
+
+
+
+    <!-- Dependencies -->
+    <dependencies>
+      
+      <dependency>
+         <groupId>log4j</groupId>
+         <artifactId>log4j</artifactId>
+         <version>1.2.17</version>
+      </dependency>
+
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>4.11</version>
+      </dependency>
+
+    </dependencies>
+   
+    <repositories>
+        <repository>
+            <id>ondrazizka</id>
+            <url>http://ondrazizka.googlecode.com/svn/maven</url>
+        </repository>
+    </repositories>
+
+</project>

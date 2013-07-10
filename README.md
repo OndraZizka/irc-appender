@@ -9,6 +9,23 @@ Their readme: http://ircappender.sourceforge.net/
 Mavenized and artifact put here: http://ondrazizka.googlecode.com/svn/maven/net/sf/ircappender/IrcAppender/
 
 
+Maven Dependency:
+====================
+
+    <!-- Dependencies -->
+    <dependencies>
+        <dependency>
+            <groupId>net.sf.ircappender</groupId>
+            <artifactId>IrcAppender</artifactId>
+            <version>0.5</version>
+        </dependency>
+    </dependencies>
+    
+    <repositories>
+        <repository><id>ondrazizka-googlecode</id><url>http://ondrazizka.googlecode.com/svn/maven</url></repository>
+    </repositories>
+
+
 Usage
 ======
 
